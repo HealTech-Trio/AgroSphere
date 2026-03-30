@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "AgriSphere",
+    "slug": "AgriSphere",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/Images/CropMateFirstPage.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/Images/CropMateFirstPage.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F2027"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/Images/CropMateFirstPage.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/Images/CropMateFirstPage.png"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store"
+    ]
+  }
+}
