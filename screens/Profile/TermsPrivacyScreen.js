@@ -30,7 +30,7 @@ const TermsPrivacyScreen = () => {
       {
         id: 'acceptance',
         title: '1. Acceptance of Terms',
-        content: `By accessing and using agrisphere ("the App"), you agree to be bound by these Terms of Service and all applicable laws and regulations in South Africa. If you do not agree with any of these terms, you are prohibited from using the App.`
+        content: `By accessing and using AgriSphere ("the App"), you agree to be bound by these Terms of Service and all applicable laws and regulations in South Africa. If you do not agree with any of these terms, you are prohibited from using the App.`
       },
       {
         id: 'license',
@@ -61,7 +61,7 @@ const TermsPrivacyScreen = () => {
       {
         id: 'intellectual-property',
         title: '6. Intellectual Property',
-        content: `All content, features, and functionality of the App are owned by agrisphere Smart and are protected by South African and international copyright, trademark, and other intellectual property laws.`
+        content: `All content, features, and functionality of the App are owned by AgriSphere and are protected by South African and international copyright, trademark, and other intellectual property laws.`
       },
       {
         id: 'termination',
@@ -71,12 +71,12 @@ const TermsPrivacyScreen = () => {
       {
         id: 'disclaimer',
         title: '8. Disclaimer',
-        content: `The App is provided "as is". agrisphere makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.`
+        content: `The App is provided "as is". AgriSphere makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.`
       },
       {
         id: 'limitations',
         title: '9. Limitations of Liability',
-        content: `In no event shall agrisphere or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the App.`
+        content: `In no event shall AgriSphere or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the App.`
       },
       {
         id: 'governing-law',
@@ -95,7 +95,7 @@ const TermsPrivacyScreen = () => {
       {
         id: 'introduction',
         title: '1. Introduction',
-        content: `agrisphere is committed to protecting your privacy and ensuring that your personal information is collected and used properly, lawfully, and transparently in compliance with the Protection of Personal Information Act (POPIA).`
+        content: `AgriSphere is committed to protecting your privacy and ensuring that your personal information is collected and used properly, lawfully, and transparently in compliance with the Protection of Personal Information Act (POPIA).`
       },
       {
         id: 'information-collected',
@@ -314,7 +314,7 @@ const TermsPrivacyScreen = () => {
         {/* Acceptance Footer */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            By using agrisphere, you acknowledge that you have read and understood{' '}
+            By using AgriSphere, you acknowledge that you have read and understood{' '}
             {activeTab === 'terms' ? 'these Terms of Service' : 'this Privacy Policy'}.
           </Text>
         </View>

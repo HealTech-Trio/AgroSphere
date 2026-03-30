@@ -202,7 +202,7 @@ export default function SmartChatScreen({ navigation }) {
       </View>
       <Text style={styles.emptyTitle}>No conversations yet</Text>
       <Text style={styles.emptySubtitle}>
-        Start a conversation to get farming guidance and crop management support
+        Start a conversation to get instant farming guidance, disease detection, and crop management support
       </Text>
       <TouchableOpacity style={styles.emptyButton} onPress={handleNewConversation}>
         <Text style={styles.emptyButtonText}>Start Chatting</Text>
@@ -222,10 +222,10 @@ export default function SmartChatScreen({ navigation }) {
         style={styles.heroHeader}
       >
         <View style={styles.heroContent}>
-          <Text style={styles.heroTitle}>Smart Chat</Text>
+          <Text style={styles.heroTitle}>AgriSphere</Text>
           <Text style={styles.heroTitle2}>AI Farm Advisor</Text>
           <Text style={styles.heroSub}>
-            Crop guidance · Farm intelligence
+            Disease detection · Soil health · Yield prediction
           </Text>
         </View>
         <View style={styles.heroDeco1} />

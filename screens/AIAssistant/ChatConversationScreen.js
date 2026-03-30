@@ -299,17 +299,17 @@ export default function ChatConversationScreen({ route, navigation }) {
       </Text>
       <Text style={styles.emptySubtitle}>
         {conversationId 
-          ? 'Send a message to start chatting with VisionAlly AI'
-          : 'Ask me anything about careers, job interviews, or professional development'
+          ? 'Send a message to start chatting with AgriSphere AI'
+          : 'Ask me anything about crops, soil health, or farming advice'
         }
       </Text>
       
       <View style={styles.suggestionContainer}>
         <Text style={styles.suggestionTitle}>Try asking:</Text>
         {[
-          "How should I prepare for this job interview?",
-          "Can you help me improve my CV?",
-          "What workplace accommodations should I request?"
+          "My maize leaves are turning yellow, what could be wrong?",
+          "When is the best time to plant tomatoes in my region?",
+          "How can I improve my soil health for better yields?"
         ].map((suggestion, index) => (
           <TouchableOpacity
             key={index}
@@ -380,7 +380,7 @@ export default function ChatConversationScreen({ route, navigation }) {
 
               <View style={styles.brandTextContainer}>
                 <View style={styles.brandNameRow}>
-                  <Text style={styles.visionAllyText}>VisionAlly</Text>
+                  <Text style={styles.agriSphereText}>AgriSphere</Text>
                   <View style={styles.aiChip}>
                     <Text style={styles.aiChipText}>AI</Text>
                   </View>
@@ -541,7 +541,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 2,
   },
-  visionAllyText: {
+  agriSphereText: {
     fontSize: 20,
     fontWeight: '800',
     color: COLORS.textPrimary,

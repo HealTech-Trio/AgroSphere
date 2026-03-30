@@ -146,7 +146,7 @@ const HelpCenterScreen = () => {
       description: 'Message us on WhatsApp',
       icon: 'logo-whatsapp',
       color: '#25D366',
-      action: () => Linking.openURL('https://wa.me/27123456789?text=Hi%20agrisphere%20Support,%20I%20need%20help%20with...')
+      action: () => Linking.openURL('https://wa.me/27123456789?text=Hi%20AgriSphere%20Support,%20I%20need%20help%20with...')
     }
   ];
 

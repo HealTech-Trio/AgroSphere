@@ -9,7 +9,7 @@ import {
   Pressable,
   Alert
 } from 'react-native';
-import AgriSphereLogo from '../../assets/Images/CropMateFirstPage.png';
+import AgriSphereLogo from '../../assets/Images/AgriSphereLogo.png';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { COLORS } from '../../constants/colors';
