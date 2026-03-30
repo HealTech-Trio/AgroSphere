@@ -11,7 +11,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Platform } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { useNotifications } from '../../context/NotificationsContext';
@@ -25,7 +25,6 @@ import { COLORS } from '../../constants/colors';
 const { width: screenWidth } = Dimensions.get('window');
 
 const HomeScreen = () => {
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const { unreadCount } = useNotifications();
   const { connectedDevice, connectionStatus, realTimeData } = useDevice();
@@ -148,62 +147,57 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
-      
-      {/* Top Gradient Overlay */}
-      <LinearGradient
-        colors={COLORS.gradients.heroSoft}
-        style={[styles.gradientOverlay, { height: insets.top + 120 }]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-      />
+      <StatusBar barStyle="light-content" backgroundColor={COLORS.inkDark} />
 
-      {/* Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
-        <View style={styles.headerLeft}>
-          <View style={styles.logoContainer}>
-            {/* AgriSphere Logo Icon */}
-            <View style={styles.logoIcon}>
-              <Image source={AgriSphereLogo} style={styles.logo}></Image>
-            </View>
-            
-            {/* App Name with Gradient Effect */}
-            <View style={styles.appNameContainer}>
-              <Text style={styles.appName}>
-                <Text style={styles.agriText}>Agri</Text>
-                <Text style={styles.sphereText}>Sphere</Text>
-              </Text>
-              <View style={styles.tagline}>
-                <Text style={styles.taglineText}>Smart Farming</Text>
+      {/* Hero Header */}
+      <LinearGradient
+        colors={[COLORS.inkDark, COLORS.inkSoft]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.heroHeader}
+      >
+        <View style={styles.heroContent}>
+          <View style={styles.heroRow}>
+            <View style={styles.logoContainer}>
+              <View style={styles.logoIcon}>
+                <Image source={AgriSphereLogo} style={styles.logo} />
               </View>
+              <View style={styles.appNameContainer}>
+                <Text style={styles.appName}>
+                  <Text style={styles.agriText}>Agri</Text>
+                  <Text style={styles.sphereText}>Sphere</Text>
+                </Text>
+                <Text style={styles.heroSub}>Smart Farming</Text>
+              </View>
+            </View>
+            <View style={styles.headerRight}>
+              <TouchableOpacity style={styles.headerIcon}>
+                <Ionicons name="hardware-chip-outline" size={22} color={COLORS.white} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.headerIcon}
+                onPress={() => navigation.navigate('Notifications')}
+              >
+                <View>
+                  <Ionicons name="notifications-outline" size={22} color={COLORS.white} />
+                  {unreadCount > 0 && (
+                    <View style={styles.notificationBadge}>
+                      <Text style={styles.badgeText}>
+                        {unreadCount > 9 ? '9+' : unreadCount}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
-        <View style={styles.headerRight}>
-          {/* Device icon */}
-          <TouchableOpacity 
-            style={styles.headerIcon}>
-            <Ionicons name="hardware-chip-outline" size={24} color={COLORS.textPrimary} />
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.headerIcon}
-            onPress={() => navigation.navigate('Notifications')}
-          >
-            <View>
-              <Ionicons name="notifications-outline" size={24} color={COLORS.textPrimary} />
-              {unreadCount > 0 && (
-                <View style={styles.notificationBadge}>
-                  <Text style={styles.badgeText}>
-                    {unreadCount > 9 ? '9+' : unreadCount}
-                  </Text>
-                </View>
-              )}
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+        <View style={styles.heroDeco1} />
+        <View style={styles.heroDeco2} />
+      </LinearGradient>
 
-      {/* Main Content */}
+      {/* Content */}
+      <View style={styles.contentSheet}>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
@@ -304,6 +298,7 @@ const HomeScreen = () => {
         {/* Bottom spacing for tab bar */}
         <View style={{ height: 100 }} />
       </ScrollView>
+      </View>
     </View>
   );
 };
@@ -313,107 +308,84 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.backgroundSecondary,
   },
-  gradientOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 0,
+  heroHeader: {
+    paddingTop: Platform.OS === 'ios' ? 54 : (StatusBar.currentHeight || 0) + 20,
+    paddingBottom: 44,
+    paddingHorizontal: 24,
+    position: 'relative',
+    overflow: 'hidden',
   },
-  header: {
+  heroContent: { zIndex: 2 },
+  heroRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 18,
-    paddingBottom: 30,
-    zIndex: 1,
   },
-  headerLeft: {
+  heroSub: {
+    fontSize: 12, color: 'rgba(255,255,255,0.55)', fontWeight: '500', marginTop: 4,
+  },
+  heroDeco1: {
+    position: 'absolute', right: -30, top: -30,
+    width: 160, height: 160, borderRadius: 80,
+    backgroundColor: 'rgba(255,255,255,0.04)',
+  },
+  heroDeco2: {
+    position: 'absolute', right: 50, bottom: -50,
+    width: 120, height: 120, borderRadius: 60,
+    backgroundColor: 'rgba(255,255,255,0.03)',
+  },
+  contentSheet: {
     flex: 1,
+    backgroundColor: COLORS.backgroundSecondary,
+    borderTopRightRadius: 30,
+    marginTop: -20,
+    overflow: 'hidden',
   },
   logoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: -6,
   },
   logoIcon: {
-    width: 40,
-    height: 40,
+    width: 60,
+    height: 60,
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 5,
-    shadowColor: COLORS.primary,
-    shadowOffset: { width: 10, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-    position: 'relative',
-    marginBottom: 5,
+    marginRight: 8,
   },
-  logo:{
+  logo: {
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   appNameContainer: {
     flexDirection: 'column',
-    paddingLeft: 4,
   },
   appName: {
     fontSize: 26,
     fontWeight: '700',
     letterSpacing: -0.5,
     lineHeight: 30,
-    textShadowColor: 'rgba(0,0,0,0.12)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
   },
   agriText: {
-    color: COLORS.textPrimary,
-    fontWeight: '800',
-    textShadowColor: 'rgba(0,0,0,0.14)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
+    color: COLORS.white,
+    fontWeight: '900',
   },
   sphereText: {
-    color: COLORS.primary,
-    fontWeight: '700',
-    textShadowColor: 'rgba(0,0,0,0.14)',
-    textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
-  },
-  tagline: {
-    backgroundColor: COLORS.primarySoft,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 8,
-    alignSelf: 'flex-start',
-    marginTop: 2,
-  },
-  taglineText: {
-    fontSize: 9,
-    color: COLORS.primaryDark,
-    fontWeight: '600',
-    letterSpacing: 0.5,
-    textTransform: 'uppercase',
+    color: COLORS.primaryLight,
+    fontWeight: '900',
   },
   headerRight: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 10,
   },
   headerIcon: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255,255,255,0.15)',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 2,
   },
   notificationBadge: {
     position: 'absolute',

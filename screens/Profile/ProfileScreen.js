@@ -12,6 +12,7 @@ import {
   Switch,
   Image,
   Alert,
+  Platform,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -280,35 +281,34 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container} key={refreshKey}>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
-      
-      {/* Animated Header Background */}
-      <Animated.View
-        style={[
-          styles.headerBackground,
-          {
-            opacity: headerOpacity,
-            transform: [{ scale: headerScale }],
-          },
-        ]}
-      >
-        <LinearGradient
-          colors={['rgba(11, 132, 87, 0.12)', 'transparent']}
-          style={styles.headerGradient}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0, y: 1 }}
-        />
-      </Animated.View>
+      <StatusBar barStyle="light-content" backgroundColor={COLORS.inkDark} />
 
-      {/* Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>{activeSection}</Text>
-          <TouchableOpacity style={styles.editButton} onPress={handleEditFarmerDetails}>
-            <Ionicons name="pencil" size={20} color="#0B8457" />
-          </TouchableOpacity>
+      {/* Fixed Hero Header */}
+      <LinearGradient
+        colors={[COLORS.inkDark, COLORS.inkSoft]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.heroHeader}
+      >
+        <View style={styles.heroContent}>
+          <View style={styles.heroRow}>
+            <View>
+              <Text style={styles.heroTitle}>My</Text>
+              <Text style={styles.heroTitle2}>Profile</Text>
+            </View>
+            <TouchableOpacity style={styles.heroEditButton} onPress={handleEditFarmerDetails}>
+              <Ionicons name="pencil" size={20} color={COLORS.white} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.heroSub}>
+            Account · Farm details · Preferences
+          </Text>
         </View>
-      </View>
+        <View style={styles.heroDeco1} />
+        <View style={styles.heroDeco2} />
+      </LinearGradient>
+
+      <View style={styles.contentSheet}>
 
       {/* Main Content */}
       <Animated.ScrollView
@@ -486,6 +486,7 @@ const ProfileScreen = () => {
           <Text style={styles.versionText}>AgriSphere v1.0.0</Text>
         </View>
       </Animated.ScrollView>
+      </View>
     </View>
   );
 };
@@ -499,40 +500,46 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  headerBackground: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 200,
-    zIndex: 0,
+  heroHeader: {
+    paddingTop: Platform.OS === 'ios' ? 54 : (StatusBar.currentHeight || 0) + 20,
+    paddingBottom: 44, paddingHorizontal: 24,
+    position: 'relative', overflow: 'hidden',
   },
-  headerGradient: {
-    flex: 1,
-  },
-  header: {
-    paddingHorizontal: 20,
-    paddingBottom: 16,
-    zIndex: 1,
-  },
-  headerContent: {
+  heroContent: { zIndex: 2 },
+  heroRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: COLORS.textPrimary,
-    letterSpacing: -0.5,
+  heroTitle: { fontSize: 30, fontWeight: '900', color: COLORS.white, letterSpacing: -0.5 },
+  heroTitle2: { fontSize: 30, fontWeight: '900', color: COLORS.primaryLight, letterSpacing: -0.5 },
+  heroSub: {
+    fontSize: 12, color: 'rgba(255,255,255,0.55)', fontWeight: '500', marginTop: 6,
   },
-  editButton: {
+  heroEditButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: COLORS.primarySoft,
+    backgroundColor: 'rgba(255,255,255,0.15)',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  heroDeco1: {
+    position: 'absolute', right: -30, top: -30,
+    width: 160, height: 160, borderRadius: 80,
+    backgroundColor: 'rgba(255,255,255,0.04)',
+  },
+  heroDeco2: {
+    position: 'absolute', right: 50, bottom: -50,
+    width: 120, height: 120, borderRadius: 60,
+    backgroundColor: 'rgba(255,255,255,0.03)',
+  },
+  contentSheet: {
+    flex: 1,
+    backgroundColor: COLORS.backgroundSecondary,
+    borderTopRightRadius: 30,
+    marginTop: -20,
+    overflow: 'hidden',
   },
   scrollView: {
     flex: 1,

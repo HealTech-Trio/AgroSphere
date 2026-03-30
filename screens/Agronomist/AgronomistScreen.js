@@ -10,7 +10,8 @@ import {
   StatusBar,
   ActivityIndicator,
   RefreshControl,
-  TextInput
+  TextInput,
+  Platform,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,6 +21,7 @@ import FilterBar from './components/FilterBar';
 import AgronomistMap from './components/AgronomistMap';
 import { useAgronomists } from '../../hooks/useAgronomists';
 import { filterOptions, sortOptions } from './data';
+import { COLORS } from '../../constants/colors';
 
 const AgronomistScreen = () => {
   const insets = useSafeAreaInsets();
@@ -132,31 +134,28 @@ const AgronomistScreen = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
-      
-      <LinearGradient
-        colors={['rgba(11, 132, 87, 0.29)', 'transparent']}
-        style={[styles.gradientOverlay, { height: insets.top + 60 }]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-      />
-      
-      {/* Header */}
-      <View style={[styles.header, { paddingTop: 16 }]}>
-        <View style={styles.headerRow}>
-          <View style={styles.headerTextBlock}>
-            <Text style={styles.headerTitle}>Find Agronomists</Text>
-            <Text style={styles.headerSubtitle}>
-              Connect with agricultural experts near you
-            </Text>
-          </View>
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={COLORS.inkDark} />
 
-          <TouchableOpacity style={styles.headerIcon} onPress={() => console.log('Settings pressed')}>
-            <Ionicons name="settings-outline" size={24} color="#2E2E2E" />
-          </TouchableOpacity>
+      {/* Fixed Hero Header */}
+      <LinearGradient
+        colors={[COLORS.inkDark, COLORS.inkSoft]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.heroHeader}
+      >
+        <View style={styles.heroContent}>
+          <Text style={styles.heroTitle}>Find</Text>
+          <Text style={styles.heroTitle2}>Agronomists</Text>
+          <Text style={styles.heroSub}>
+            Connect with agricultural experts near you
+          </Text>
         </View>
-      </View>
+        <View style={styles.heroDeco1} />
+        <View style={styles.heroDeco2} />
+      </LinearGradient>
+
+      <View style={styles.contentSheet}>
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
@@ -288,14 +287,43 @@ const AgronomistScreen = () => {
           )}
         </View>
       )}
-    </SafeAreaView>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F7FA',
+    backgroundColor: COLORS.backgroundSecondary,
+  },
+  heroHeader: {
+    paddingTop: Platform.OS === 'ios' ? 54 : (StatusBar.currentHeight || 0) + 20,
+    paddingBottom: 44, paddingHorizontal: 24,
+    position: 'relative', overflow: 'hidden',
+  },
+  heroContent: { zIndex: 2 },
+  heroTitle: { fontSize: 30, fontWeight: '900', color: COLORS.white, letterSpacing: -0.5 },
+  heroTitle2: { fontSize: 30, fontWeight: '900', color: COLORS.primaryLight, letterSpacing: -0.5 },
+  heroSub: {
+    fontSize: 12, color: 'rgba(255,255,255,0.55)', fontWeight: '500', marginTop: 6,
+  },
+  heroDeco1: {
+    position: 'absolute', right: -30, top: -30,
+    width: 160, height: 160, borderRadius: 80,
+    backgroundColor: 'rgba(255,255,255,0.04)',
+  },
+  heroDeco2: {
+    position: 'absolute', right: 50, bottom: -50,
+    width: 120, height: 120, borderRadius: 60,
+    backgroundColor: 'rgba(255,255,255,0.03)',
+  },
+  contentSheet: {
+    flex: 1,
+    backgroundColor: COLORS.backgroundSecondary,
+    borderTopRightRadius: 30,
+    marginTop: -20,
+    overflow: 'hidden',
   },
   // Search Bar Styles
   searchContainer: {
@@ -383,50 +411,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     alignItems: 'center',
-  },
-  gradientOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    zIndex: 0,
-  },
-  header: {
-    paddingHorizontal: 20,
-    paddingBottom: 16,
-    zIndex: 1,
-  },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#1A2332',
-    letterSpacing: -0.5,
-    marginBottom: 7,
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: '#9B9B9B',
-  },
-  headerRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  headerTextBlock: {
-    flex: 1,
-  },
-  headerIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 2,
   },
   tabContainer: {
     flexDirection: 'row',

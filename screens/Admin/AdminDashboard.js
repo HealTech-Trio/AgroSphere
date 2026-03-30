@@ -7,12 +7,16 @@ import {
   TouchableOpacity,
   Alert,
   ScrollView,
-  RefreshControl
+  RefreshControl,
+  Platform,
+  StatusBar,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { useAdminAnalytics } from '../../hooks/useAdminAnalytics';
+import { COLORS } from '../../constants/colors';
 import StatCard from './components/StatCard';
 
 export default function AdminDashboard({ navigation }) {
@@ -50,19 +54,32 @@ export default function AdminDashboard({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.title}>Admin Dashboard</Text>
-          <Text style={styles.subtitle}>Real-time platform analytics</Text>
+      <StatusBar barStyle="light-content" />
+      {/* Hero Header */}
+      <LinearGradient
+        colors={[COLORS.inkDark, COLORS.inkSoft]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.heroHeader}
+      >
+        <View style={styles.heroDeco1} />
+        <View style={styles.heroDeco2} />
+        <View style={styles.heroContent}>
+          <View style={styles.heroRow}>
+            <View>
+              <Text style={styles.heroTitle}>Admin</Text>
+              <Text style={styles.heroTitle2}>Dashboard</Text>
+              <Text style={styles.heroSub}>Real-time platform analytics</Text>
+            </View>
+            <TouchableOpacity style={styles.heroSignOutButton} onPress={handleSignOut}>
+              <Ionicons name="log-out-outline" size={20} color={COLORS.white} />
+            </TouchableOpacity>
+          </View>
         </View>
-        <TouchableOpacity style={styles.signOutButton} onPress={handleSignOut}>
-          <Ionicons name="log-out-outline" size={20} color="#0B8457" />
-          <Text style={styles.signOutText}>Sign Out</Text>
-        </TouchableOpacity>
-      </View>
+      </LinearGradient>
 
-      {/* Analytics Section */}
+      {/* Content */}
+      <View style={styles.contentSheet}>
       <ScrollView 
         style={styles.content}
         refreshControl={
@@ -214,6 +231,7 @@ export default function AdminDashboard({ navigation }) {
           </View>
         </View> */}
       </ScrollView>
+      </View>
     </View>
   );
 }
@@ -221,44 +239,50 @@ export default function AdminDashboard({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: COLORS.backgroundSecondary,
   },
-  header: {
+  heroHeader: {
+    paddingTop: Platform.OS === 'ios' ? 54 : (StatusBar.currentHeight || 0) + 20,
+    paddingBottom: 44,
+    paddingHorizontal: 24,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  heroContent: { zIndex: 2 },
+  heroRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  heroTitle: { fontSize: 30, fontWeight: '900', color: COLORS.white, letterSpacing: -0.5 },
+  heroTitle2: { fontSize: 30, fontWeight: '900', color: COLORS.primaryLight, letterSpacing: -0.5 },
+  heroSub: {
+    fontSize: 12, color: 'rgba(255,255,255,0.55)', fontWeight: '500', marginTop: 6,
+  },
+  heroSignOutButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255,255,255,0.15)',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 60,
-    paddingBottom: 20,
-    backgroundColor: 'white',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e9ecef',
+    justifyContent: 'center',
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#0B8457',
+  heroDeco1: {
+    position: 'absolute', right: -30, top: -30,
+    width: 160, height: 160, borderRadius: 80,
+    backgroundColor: 'rgba(255,255,255,0.04)',
   },
-  subtitle: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 4,
+  heroDeco2: {
+    position: 'absolute', right: 50, bottom: -50,
+    width: 120, height: 120, borderRadius: 60,
+    backgroundColor: 'rgba(255,255,255,0.03)',
   },
-  signOutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#0B8457',
-  },
-  signOutText: {
-    color: '#0B8457',
-    fontWeight: '600',
-    marginLeft: 6,
-    fontSize: 14,
+  contentSheet: {
+    flex: 1,
+    backgroundColor: COLORS.backgroundSecondary,
+    borderTopRightRadius: 30,
+    marginTop: -20,
+    overflow: 'hidden',
   },
   content: {
     flex: 1,
