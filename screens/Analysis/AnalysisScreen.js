@@ -181,6 +181,40 @@ const AnalysisScreen = ({ navigation }) => {
           </View>
         </View>
 
+        {/* 3D Visualization */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>3D Visualization</Text>
+          </View>
+
+          <TouchableOpacity
+            style={styles.vizCard}
+            activeOpacity={0.85}
+            onPress={() => navigation.navigate('FarmVisualization')}
+          >
+            <LinearGradient
+              colors={[COLORS.inkDark, COLORS.inkSoft]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.vizCardGradient}
+            >
+              <View style={styles.vizCardContent}>
+                <View style={styles.vizCardIcon}>
+                  <Ionicons name="cube-outline" size={32} color={COLORS.primaryLight} />
+                </View>
+                <View style={styles.vizCardText}>
+                  <Text style={styles.vizCardTitle}>Smart Farm 3D</Text>
+                  <Text style={styles.vizCardDesc}>
+                    Interactive farm with IoT sensors, soil moisture & robotic weeder
+                  </Text>
+                </View>
+                <Ionicons name="play-circle" size={36} color={COLORS.primaryLight} />
+              </View>
+              <View style={styles.vizDeco} />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+
         {/* Last Update Section */}
         <View style={styles.lastUpdateContainer}>
           <View style={styles.onlineIndicator} />
@@ -258,7 +292,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -30,
+    marginTop: 0,
     marginBottom: 67,
     paddingHorizontal: 20,
   },
@@ -272,6 +306,58 @@ const styles = StyleSheet.create({
   lastUpdateText: {
     fontSize: 12,
     color: '#9B9B9B',
+  },
+  vizCard: {
+    borderRadius: 16,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  vizCardGradient: {
+    padding: 20,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  vizCardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    zIndex: 2,
+  },
+  vizCardIcon: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: 'rgba(46,196,182,0.12)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 14,
+  },
+  vizCardText: {
+    flex: 1,
+    marginRight: 10,
+  },
+  vizCardTitle: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: COLORS.white,
+    marginBottom: 4,
+  },
+  vizCardDesc: {
+    fontSize: 12,
+    color: 'rgba(255,255,255,0.55)',
+    lineHeight: 16,
+  },
+  vizDeco: {
+    position: 'absolute',
+    right: -20,
+    top: -20,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: 'rgba(255,255,255,0.03)',
   },
 });
 

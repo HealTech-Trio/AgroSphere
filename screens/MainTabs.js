@@ -33,6 +33,7 @@ import DiseaseDetectionScreen from './Analysis/DiseaseDetection/DiseaseDetection
 import SoilHealthScreen from './Analysis/SoilHealth/SoilHealthScreen';
 import IrrigationOptimizationScreen from './Analysis/IrrigationOptimization/IrrigationOptimizationScreen';
 import YieldPredictionScreen from './Analysis/YieldPrediction/YieldPredictionScreen';
+import FarmVisualizationScreen from './Analysis/FarmVisualizationScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -109,6 +110,7 @@ function AnalysisStackScreen() {
       <Stack.Screen name="YieldPrediction" component={YieldPredictionScreen} />
       <Stack.Screen name="SoilHealth" component={SoilHealthScreen} />
       <Stack.Screen name="IrrigationOptimization" component={IrrigationOptimizationScreen} />
+      <Stack.Screen name="FarmVisualization" component={FarmVisualizationScreen} />
       </Stack.Navigator>
   );
 }
@@ -136,7 +138,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
   const nestedState = focusedRoute.state;
   if (nestedState) {
     const nestedRouteName = nestedState.routes[nestedState.index]?.name;
-    if (nestedRouteName === 'ChatConversation') {
+    if (nestedRouteName === 'ChatConversation' || nestedRouteName === 'FarmVisualization') {
       return null;
     }
   }
