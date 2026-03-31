@@ -215,6 +215,40 @@ const AnalysisScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
+        {/* Drone AI System */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Drone AI System</Text>
+          </View>
+
+          <TouchableOpacity
+            style={styles.vizCard}
+            activeOpacity={0.85}
+            onPress={() => navigation.navigate('DroneAI')}
+          >
+            <LinearGradient
+              colors={['#1B3A4B', '#274C5B']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.vizCardGradient}
+            >
+              <View style={styles.vizCardContent}>
+                <View style={[styles.vizCardIcon, { backgroundColor: 'rgba(59,130,246,0.12)' }]}>
+                  <MaterialCommunityIcons name="quadcopter" size={32} color="#3B82F6" />
+                </View>
+                <View style={styles.vizCardText}>
+                  <Text style={styles.vizCardTitle}>Drone AI Dashboard</Text>
+                  <Text style={styles.vizCardDesc}>
+                    YOLOv5 weed & crop detection with real-time drone controls
+                  </Text>
+                </View>
+                <Ionicons name="play-circle" size={36} color="#3B82F6" />
+              </View>
+              <View style={styles.vizDeco} />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+
         {/* Last Update Section */}
         <View style={styles.lastUpdateContainer}>
           <View style={styles.onlineIndicator} />
