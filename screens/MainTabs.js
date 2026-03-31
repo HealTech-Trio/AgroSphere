@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COLORS } from '../constants/colors';
@@ -129,6 +130,16 @@ function AgronomistStackScreen() {
 // Custom Tab Bar Component
 const CustomTabBar = ({ state, descriptors, navigation }) => {
   const insets = useSafeAreaInsets();
+
+  // Hide tab bar when inside ChatConversation screen
+  const focusedRoute = state.routes[state.index];
+  const nestedState = focusedRoute.state;
+  if (nestedState) {
+    const nestedRouteName = nestedState.routes[nestedState.index]?.name;
+    if (nestedRouteName === 'ChatConversation') {
+      return null;
+    }
+  }
   
   return (
     <View style={[styles.tabBarContainer, { paddingBottom: insets.bottom }]}>
