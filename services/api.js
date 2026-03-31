@@ -1,7 +1,7 @@
 // services/api.js
 
 const API_CONFIG = {
-  BASE_URL: 'http://10.96.86.131:5000', 
+  BASE_URL: 'http://10.96.86.27:5000', 
   TIMEOUT: 90000,
 };
 

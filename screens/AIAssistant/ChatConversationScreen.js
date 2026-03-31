@@ -113,23 +113,28 @@ export default function ChatConversationScreen({ route, navigation }) {
   const updateConversationInfo = async (lastMessage, newTitle = null) => {
     if (!conversationId) return;
 
-    const conversation = await ChatStorageService.getConversation(conversationId);
-    if (conversation) {
-      const updates = {
-        lastMessage: lastMessage?.text || lastMessage?.documentName || 'Image/Audio message',
-        updatedAt: new Date().toISOString(),
-        messageCount: messages.length + 1,
-      };
+    try {
+      const conversations = await ChatStorageService.getConversations();
+      const conversation = conversations.find(c => c.id === conversationId);
+      if (conversation) {
+        const updates = {
+          lastMessage: lastMessage?.text || lastMessage?.documentName || 'Image/Audio message',
+          updatedAt: new Date().toISOString(),
+          messageCount: messages.length + 1,
+        };
 
-      if (newTitle) {
-        updates.title = newTitle;
-        setConversationTitle(newTitle);
+        if (newTitle) {
+          updates.title = newTitle;
+          setConversationTitle(newTitle);
+        }
+
+        await ChatStorageService.saveConversation({
+          ...conversation,
+          ...updates
+        });
       }
-
-      await ChatStorageService.saveConversation({
-        ...conversation,
-        ...updates
-      });
+    } catch (error) {
+      console.error('Error updating conversation info:', error);
     }
   };
 
