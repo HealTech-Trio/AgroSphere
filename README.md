@@ -33,6 +33,7 @@ AgriSphere is a comprehensive digital farming assistant platform designed for sm
 ## Features
 
 ### AI Smart Chat
+
 - Multi-modal conversational AI assistant powered by **Google Gemini 2.5 Flash**
 - Supports text, image, audio, and document (PDF) input
 - Agricultural-domain system instructions for context-aware responses
@@ -41,36 +42,43 @@ AgriSphere is a comprehensive digital farming assistant platform designed for sm
 - Markdown rendering in message bubbles
 
 ### Disease Detection
+
 - Camera/gallery image upload for crop disease identification
 - Structured AI analysis: disease name, confidence level, severity, symptoms, treatments, and prevention
 - Optional IoT sensor data correlation for enhanced diagnosis
 
 ### Yield Prediction
+
 - Multi-factor weighted prediction model using crop type, farm area, soil type, irrigation, planting date, and growth stage
 - IoT data integration for real-time environmental factors
 - Returns yield estimate ranges, harvest date prediction, growth timeline, weather impact analysis, and risk factors
 
 ### Soil Health Assessment
+
 - Uses IoT sensor readings (temperature, humidity, soil moisture) combined with farm information
 - Generates health score (0–100), condition rating, nutrient analysis, and actionable recommendations
 
 ### Irrigation & Fertilizer Optimization
+
 - Analyzes IoT data, farm conditions, and crop requirements
 - Produces efficiency score, irrigation schedule (timing, volume, frequency), fertilizer plan, and water stress level
 
 ### 3D Farm Visualization
+
 - Interactive Three.js scene rendered inside a WebView
 - 3D farm with IoT sensor nodes, soil moisture color-coded crop zones, animated robotic weeder
 - Touch orbit controls, pinch-to-zoom, tap-to-inspect crops and sensors
 - Real-time simulated IoT data updates
 
 ### Weather Intelligence
+
 - Farm-specific weather from OpenWeatherMap (auto-selects from user's saved farms)
 - Current conditions: temperature, humidity, wind speed, rain probability
 - 5-day forecast
 - Smart alerts: high/low temperature, heavy rain, strong wind, high humidity, storms
 
 ### IoT Device Management
+
 - Auto-discovery of ESP32/ESP8266 devices on local network (subnet scan)
 - WebSocket real-time sensor streaming (temperature, humidity, soil moisture)
 - Password-based device authentication
@@ -78,12 +86,14 @@ AgriSphere is a comprehensive digital farming assistant platform designed for sm
 - Sensor data feeds into Home insights, Analysis tools, Weather alerts, and Notifications
 
 ### Agronomist Directory
+
 - List and map views of agronomists (combined hardcoded + Firebase data)
 - Filter by availability, rating (≥4.5), distance (≤5km), experience (≥10 years)
 - Search by name, specialty, or city
 - Google Maps integration for location display
 
 ### Admin Dashboard
+
 - Real-time platform analytics: total farmers, agronomists, farms, active users
 - Full user management
 - Agronomist CRUD with profile image upload to Firebase Storage
@@ -91,12 +101,14 @@ AgriSphere is a comprehensive digital farming assistant platform designed for sm
 - Auto-refresh every 30 seconds
 
 ### User Management & Auth
+
 - Email/password signup with email verification
 - Forgot password flow
 - Role-based access: `farmer` (default) and `admin`
 - Onboarding flow (FarmSetupScreen) required before main app access
 
 ### Profile & Settings
+
 - Edit profile, farm details, security settings
 - Subscription management
 - Language selection (11 South African languages)
@@ -107,23 +119,23 @@ AgriSphere is a comprehensive digital farming assistant platform designed for sm
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Frontend** | React Native 0.81.5, Expo SDK 54, React 19.1 |
-| **Navigation** | React Navigation 7 (Native Stack, Bottom Tabs, Stack, Material Top Tabs) |
-| **Backend** | Flask (Python), Google Gemini AI (gemini-2.5-flash) |
-| **Database** | Firebase Firestore |
-| **Authentication** | Firebase Auth (email/password + email verification) |
-| **File Storage** | Firebase Storage (agronomist profile images) |
-| **Weather API** | OpenWeatherMap (current + 5-day forecast) |
-| **Maps** | Google Maps (react-native-maps), Google Places Autocomplete |
-| **IoT Hardware** | ESP32, ESP8266 — DHT11 sensors, capacitive soil moisture sensors |
-| **IoT Communication** | WebSocket (real-time), HTTP REST (device discovery), ThingSpeak (cloud fallback) |
-| **Internationalization** | i18next + react-i18next (11 languages) |
-| **State Management** | React Context (DeviceContext, NotificationsContext) |
-| **Local Storage** | AsyncStorage, Expo SecureStore |
-| **UI Components** | React Native Paper, expo-linear-gradient, react-native-chart-kit |
-| **3D Visualization** | Three.js r128 (via react-native-webview) |
+| Layer                    | Technology                                                                       |
+| ------------------------ | -------------------------------------------------------------------------------- |
+| **Frontend**             | React Native 0.81.5, Expo SDK 54, React 19.1                                     |
+| **Navigation**           | React Navigation 7 (Native Stack, Bottom Tabs, Stack, Material Top Tabs)         |
+| **Backend**              | Flask (Python), Google Gemini AI (gemini-2.5-flash)                              |
+| **Database**             | Firebase Firestore                                                               |
+| **Authentication**       | Firebase Auth (email/password + email verification)                              |
+| **File Storage**         | Firebase Storage (agronomist profile images)                                     |
+| **Weather API**          | OpenWeatherMap (current + 5-day forecast)                                        |
+| **Maps**                 | Google Maps (react-native-maps), Google Places Autocomplete                      |
+| **IoT Hardware**         | ESP32, ESP8266 — DHT11 sensors, capacitive soil moisture sensors                 |
+| **IoT Communication**    | WebSocket (real-time), HTTP REST (device discovery), ThingSpeak (cloud fallback) |
+| **Internationalization** | i18next + react-i18next (11 languages)                                           |
+| **State Management**     | React Context (DeviceContext, NotificationsContext)                              |
+| **Local Storage**        | AsyncStorage, Expo SecureStore                                                   |
+| **UI Components**        | React Native Paper, expo-linear-gradient, react-native-chart-kit                 |
+| **3D Visualization**     | Three.js r128 (via react-native-webview)                                         |
 
 ---
 
@@ -335,6 +347,7 @@ python app.py
 ### IoT Hardware Setup
 
 **Components Required:**
+
 - ESP32 or ESP8266 microcontroller
 - DHT11 temperature & humidity sensor
 - Capacitive soil moisture sensor
@@ -375,28 +388,28 @@ python app.py
 
 ### Backend (.env)
 
-| Variable | Description |
-|---|---|
+| Variable         | Description                           |
+| ---------------- | ------------------------------------- |
 | `GEMINI_API_KEY` | Google Gemini API key for AI analysis |
 
 ### Frontend (hardcoded — should be moved to environment config)
 
-| File | Variable | Description |
-|---|---|---|
-| `firebase.js` | Firebase config object | Firebase project credentials (apiKey, authDomain, projectId, etc.) |
-| `services/api.js` | `API_BASE_URL` | Backend server URL (e.g., `http://10.96.86.131:5000`) |
-| `services/weatherService.js` | OpenWeatherMap API key | Weather data |
-| `config.js` | Google Maps API key | Maps and places autocomplete |
+| File                         | Variable               | Description                                                        |
+| ---------------------------- | ---------------------- | ------------------------------------------------------------------ |
+| `firebase.js`                | Firebase config object | Firebase project credentials (apiKey, authDomain, projectId, etc.) |
+| `services/api.js`            | `API_BASE_URL`         | Backend server URL (e.g., `http://10.96.86.131:5000`)              |
+| `services/weatherService.js` | OpenWeatherMap API key | Weather data                                                       |
+| `config.js`                  | Google Maps API key    | Maps and places autocomplete                                       |
 
 ### IoT Firmware
 
-| Constant | Description |
-|---|---|
-| `WIFI_SSID` | WiFi network name |
-| `WIFI_PASSWORD` | WiFi password |
-| `THINGSPEAK_API_KEY` | ThingSpeak write API key (cloud fallback) |
-| `DEVICE_PASSWORD` | Device auth password (ESP8266 only) |
-| `SOIL_DRY` / `SOIL_WET` | Soil sensor ADC calibration values |
+| Constant                | Description                               |
+| ----------------------- | ----------------------------------------- |
+| `WIFI_SSID`             | WiFi network name                         |
+| `WIFI_PASSWORD`         | WiFi password                             |
+| `THINGSPEAK_API_KEY`    | ThingSpeak write API key (cloud fallback) |
+| `DEVICE_PASSWORD`       | Device auth password (ESP8266 only)       |
+| `SOIL_DRY` / `SOIL_WET` | Soil sensor ADC calibration values        |
 
 ---
 
@@ -463,16 +476,16 @@ The bottom tab bar is hidden when viewing `ChatConversation` or `FarmVisualizati
 
 All endpoints are served by the Flask backend at `http://<host>:5000`.
 
-| Method | Endpoint | Description | Input |
-|---|---|---|---|
-| `GET` | `/health` | Health check | — |
-| `POST` | `/api/chatbot` | Multi-modal AI chat | Text, image (base64), audio (base64), document (base64 PDF), session_id |
-| `POST` | `/api/clear_session` | Clear chat session memory | session_id |
-| `POST` | `/api/analyze` | Disease detection from image | Image file + optional IoT data JSON |
-| `POST` | `/api/soil-assessment` | Soil health assessment | IoT sensor data + farm info JSON |
-| `POST` | `/api/irrigation-optimization` | Irrigation & fertilizer plan | IoT data + farm + crop info JSON |
-| `POST` | `/api/yield-prediction` | Yield prediction | Farm + crop data JSON (IoT optional) |
-| `POST` | `/api/analyse_document` | Analyze agricultural document | Base64 encoded image or PDF |
+| Method | Endpoint                       | Description                   | Input                                                                   |
+| ------ | ------------------------------ | ----------------------------- | ----------------------------------------------------------------------- |
+| `GET`  | `/health`                      | Health check                  | —                                                                       |
+| `POST` | `/api/chatbot`                 | Multi-modal AI chat           | Text, image (base64), audio (base64), document (base64 PDF), session_id |
+| `POST` | `/api/clear_session`           | Clear chat session memory     | session_id                                                              |
+| `POST` | `/api/analyze`                 | Disease detection from image  | Image file + optional IoT data JSON                                     |
+| `POST` | `/api/soil-assessment`         | Soil health assessment        | IoT sensor data + farm info JSON                                        |
+| `POST` | `/api/irrigation-optimization` | Irrigation & fertilizer plan  | IoT data + farm + crop info JSON                                        |
+| `POST` | `/api/yield-prediction`        | Yield prediction              | Farm + crop data JSON (IoT optional)                                    |
+| `POST` | `/api/analyse_document`        | Analyze agricultural document | Base64 encoded image or PDF                                             |
 
 All analysis endpoints return **structured JSON** responses via Gemini's `response_schema` parameter.
 
@@ -510,6 +523,7 @@ Firestore
 ```
 
 **Firestore Security Rules:**
+
 - Users can read/write their own documents and subcollections
 - Admins can read all user data and manage agronomists
 - Authenticated users can read agronomist listings
@@ -554,6 +568,7 @@ ESP32/ESP8266
 ### Sensor Calibration
 
 Soil moisture is calibrated from raw ADC values:
+
 - `SOIL_DRY`: ADC reading in dry air (0% moisture)
 - `SOIL_WET`: ADC reading in water (100% moisture)
 - Formula: `moisture% = map(rawADC, SOIL_DRY, SOIL_WET, 0, 100)`
@@ -564,19 +579,19 @@ Soil moisture is calibrated from raw ADC values:
 
 AgriSphere supports **11 South African official languages**:
 
-| Code | Language |
-|---|---|
-| `en` | English |
-| `zu` | Zulu |
-| `xh` | Xhosa |
-| `af` | Afrikaans |
+| Code  | Language       |
+| ----- | -------------- |
+| `en`  | English        |
+| `zu`  | Zulu           |
+| `xh`  | Xhosa          |
+| `af`  | Afrikaans      |
 | `nso` | Northern Sotho |
-| `st` | Southern Sotho |
-| `tn` | Tswana |
-| `ts` | Tsonga |
-| `ss` | Swati |
-| `ve` | Venda |
-| `nr` | Ndebele |
+| `st`  | Southern Sotho |
+| `tn`  | Tswana         |
+| `ts`  | Tsonga         |
+| `ss`  | Swati          |
+| `ve`  | Venda          |
+| `nr`  | Ndebele        |
 
 Language is selectable from **Profile → Language** and applies across the app via `i18next`.
 
@@ -586,22 +601,23 @@ Language is selectable from **Profile → Language** and applies across the app 
 
 ### Core Colors
 
-| Token | Hex | Usage |
-|---|---|---|
-| `primary` | `#0B8457` | Primary actions, buttons |
+| Token          | Hex       | Usage                          |
+| -------------- | --------- | ------------------------------ |
+| `primary`      | `#0B8457` | Primary actions, buttons       |
 | `primaryLight` | `#2EC4B6` | Accents, highlights, hero text |
-| `primaryDark` | `#065A3B` | Pressed states |
-| `accent` | `#F4A261` | Warm accent, secondary CTAs |
-| `inkDark` | `#0F2027` | Hero backgrounds, headers |
-| `inkSoft` | `#1B3A4B` | Gradient endpoints |
-| `success` | `#10B981` | Positive states |
-| `warning` | `#F59E0B` | Caution states |
-| `error` | `#EF4444` | Error states |
-| `info` | `#3B82F6` | Info states |
+| `primaryDark`  | `#065A3B` | Pressed states                 |
+| `accent`       | `#F4A261` | Warm accent, secondary CTAs    |
+| `inkDark`      | `#0F2027` | Hero backgrounds, headers      |
+| `inkSoft`      | `#1B3A4B` | Gradient endpoints             |
+| `success`      | `#10B981` | Positive states                |
+| `warning`      | `#F59E0B` | Caution states                 |
+| `error`        | `#EF4444` | Error states                   |
+| `info`         | `#3B82F6` | Info states                    |
 
 ### Hero Header Pattern
 
 All main screens use a consistent dark gradient hero header:
+
 - `LinearGradient` with colors `[COLORS.inkDark, COLORS.inkSoft]` (horizontal)
 - White title text (30px, weight 900) with `primaryLight` accent word
 - Decorative translucent circles for visual depth
@@ -613,36 +629,36 @@ All main screens use a consistent dark gradient hero header:
 
 ### JavaScript (Key Packages)
 
-| Package | Purpose |
-|---|---|
-| `expo ~54.0.0` | App framework |
-| `react-native 0.81.5` | UI runtime |
-| `firebase ^11.3.0` | Auth, Firestore, Storage |
-| `react-native-maps` | Google Maps |
-| `react-native-webview` | 3D visualization host |
-| `react-native-paper` | Material Design components |
-| `expo-camera` | Camera access for disease detection |
-| `expo-image-picker` | Image selection |
-| `expo-av` / `expo-audio` | Audio recording & playback |
-| `expo-document-picker` | PDF upload for AI analysis |
-| `react-native-chart-kit` | Data visualizations |
-| `react-native-calendars` | Farm schedule calendar |
-| `i18next` | Internationalization |
-| `moment` | Date formatting |
-| `react-native-gifted-chat` | Chat UI components |
-| `expo-location` | Location services |
-| `expo-notifications` | Push notifications |
+| Package                    | Purpose                             |
+| -------------------------- | ----------------------------------- |
+| `expo ~54.0.0`             | App framework                       |
+| `react-native 0.81.5`      | UI runtime                          |
+| `firebase ^11.3.0`         | Auth, Firestore, Storage            |
+| `react-native-maps`        | Google Maps                         |
+| `react-native-webview`     | 3D visualization host               |
+| `react-native-paper`       | Material Design components          |
+| `expo-camera`              | Camera access for disease detection |
+| `expo-image-picker`        | Image selection                     |
+| `expo-av` / `expo-audio`   | Audio recording & playback          |
+| `expo-document-picker`     | PDF upload for AI analysis          |
+| `react-native-chart-kit`   | Data visualizations                 |
+| `react-native-calendars`   | Farm schedule calendar              |
+| `i18next`                  | Internationalization                |
+| `moment`                   | Date formatting                     |
+| `react-native-gifted-chat` | Chat UI components                  |
+| `expo-location`            | Location services                   |
+| `expo-notifications`       | Push notifications                  |
 
 ### Python (requirements.txt)
 
-| Package | Purpose |
-|---|---|
-| `flask` | Web server |
-| `flask-cors` | Cross-origin requests |
-| `google-generativeai` | Gemini AI SDK |
-| `pillow` | Image processing |
-| `python-dotenv` | Environment variable loading |
-| `scipy` | Scientific computing |
+| Package               | Purpose                      |
+| --------------------- | ---------------------------- |
+| `flask`               | Web server                   |
+| `flask-cors`          | Cross-origin requests        |
+| `google-generativeai` | Gemini AI SDK                |
+| `pillow`              | Image processing             |
+| `python-dotenv`       | Environment variable loading |
+| `scipy`               | Scientific computing         |
 
 ---
 
